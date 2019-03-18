@@ -3,8 +3,12 @@ module.exports = function(grunt) {
     grunt.initConfig({
         concat: {
             js: {
-              //  src: ['assets/js/vendor/*.js', 'assets/js/main.js', 'assets/js/wc_category_filter.js'],
-              //  dest: 'build/js/main.js'
+                src: ['assets/js/main.js'],
+                dest: 'build/js/main.js'
+            },
+            css: {
+                src: ['assets/scss/bootstrap/bootstrap.css'],
+                dest: 'style.css'
             }
         },
         uglify: {
@@ -13,7 +17,7 @@ module.exports = function(grunt) {
                     mangle: false
                 },
                 files:{
-               //     'main.js':[ 'build/js/main.js']
+                    'main.js':[ 'build/js/main.js']
                 }
             }
         },
@@ -24,7 +28,7 @@ module.exports = function(grunt) {
                     check: false,
                 },
                 files:{
-               //     'style.css': 'assets/scss/style.scss'
+                    'style.css': 'assets/scss/style.scss'
                 }
             }
         },
@@ -33,12 +37,12 @@ module.exports = function(grunt) {
                 livereload: true
             },
             js:{
-            //    files: ['assets/js/**/*.js'],
-            //    tasks: ['concat:js', 'uglify:js']
+                files: ['assets/js/*.js'],
+                tasks: ['concat:js', 'uglify:js']
             },
             css:{
-           //     files: ['assets/scss/**/*.scss'],
-           //     tasks: ['sass']
+                files: ['assets/scss/**/*.scss'],
+                tasks: ['sass']
             }
         }
     })
