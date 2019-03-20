@@ -9,9 +9,16 @@
     <title>Document</title>
 </head>
 <body>
-    <nav class="navbar navbar-default"></nav>
+  <div class="conatiner">
     <div class="row">
-    <h1>próba</h1>
+      <div class="col-lg-6">
+          <h1>próba1</h1>
+      </div>
+      <div class="col-lg-6">
+          <h1>próba2</h1>
+      </div>
     </div>
+  </div>
+  
 </body>
 </html>
