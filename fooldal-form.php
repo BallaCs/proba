@@ -16,8 +16,8 @@
           <div class="col-5">
             <select class="form-control" name="album">
               <option value="" disabled selected>Melyik albumba kerüljön?</option>
-              <option>1</option>
-              <option>2</option>
+              <option>Család</option>
+              <option>Munka</option>
             </select>
           </div>
           <div class="col-1">
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="form-group">
-          <textarea class="form-control" name="exampleFormControlTextarea1" rows="15" placeholder="Vers/Szöveg" name="szoveg"></textarea>
+          <textarea class="form-control" rows="15" placeholder="Vers/Szöveg" name="szoveg"></textarea>
         </div>
         <div class="bootstrap-iso">
             <div class="form-group ">
