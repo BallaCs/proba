@@ -17,7 +17,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <div class="container">
-  <a class="navbar-brand" href="#">HGy</a>
+  <a class="navbar-brand" href="index.php">HGy</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -25,25 +25,25 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Kezdőlap<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="index.php">Kezdőlap<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Galéria</a>
+        <a class="nav-link" href="galeria.php">Galéria</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Publikációk
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Képi lélegeztetés</a>
-          <a class="dropdown-item" href="#">Egyéb</a>
+          <a class="dropdown-item" href="kepilelegeztetes.php">Képi lélegeztetés</a>
+          <a class="dropdown-item" href="egyeb-publikaciok.php">Egyéb</a>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Versek</a>
+        <a class="nav-link" href="versek.php">Versek</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Megemlítések</a>
+        <a class="nav-link" href="megemlitesek.php">Megemlítések</a>
       </li>
     </ul>
 

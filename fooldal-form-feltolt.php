@@ -1,6 +1,6 @@
 <?php
-if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['album']) || !empty($_POST['vers']) || !empty($_POST['szoveg']) || !empty($_POST['file']))){
-    var_dump(!empty($_POST['file']));
+if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['vers']) || !empty($_POST['szoveg']) || $_FILES["file"]["error"] == 0)){
+    
     if (!empty($_POST['cim'])) {
         $cim = $_POST['cim'];
     } else {
@@ -32,7 +32,7 @@ if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['album']) 
     }
 
     //echo $cim . $album . $vers . $szoveg . $date;
-    if (!empty($_POST['file'])) {
+    if ($_FILES["file"]["error"] == 0) {
         $file = $_FILES['file'];
 
         $fileName = $file['name'];
@@ -47,22 +47,37 @@ if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['album']) 
         $allowed = array('jpg','jpeg','png');
 
         if (in_array($fileActualExt, $allowed)) {
-            if ($fileError === 0) {
-                if ($fileSize < 2000000) {
-                    $fileNameNew = uniqid('', true).".".$fileActualExt;
-                    $fileDestination = 'assets/kepek/'.$fileNameNew;
-                    move_uploaded_file($fileTmpName, $fileDestination);
-                    header("Location: index.php");
-                } else {
-                    echo "Túl nagy fájl méret (nagyobb mint 2mb)";
-                }
+            if ($fileSize < 2000000) {
+                $fileNameNew = uniqid('', true).".".$fileActualExt;
+                $fileDestination = 'assets/kepek/'.$fileNameNew;
+                move_uploaded_file($fileTmpName, $fileDestination);
             } else {
-                echo "Sikertelen fájl feltöltés!";
+                echo "Túl nagy fájl méret (nagyobb mint 2mb)";
             }
         } else {
             echo "Nem megengedett fájl formátum!";
         }
     }
+    ?>
+    <!--adatbázisba-->
+    <?php require 'connect.php'; ?>
+    <?php
+        $sql = "INSERT INTO kep (utvonal) VALUES ('$fileDestination');";
+        mysqli_query($conn, $sql);
+    
+        $sql = "SELECT Kep_ID FROM kep WHERE utvonal = '$fileDestination' ORDER BY Kep_ID DESC LIMIT 1;";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $Kep_ID = row['Kep_ID'];
+        echo $Kep_ID;
+    
+    ?>
+    <?php $conn->close(); ?>
+    <!--adatbázisba end-->
+
+
+    <?php
+    //header("Location: index.php");
 }else{
     echo 'nononono';
 }
