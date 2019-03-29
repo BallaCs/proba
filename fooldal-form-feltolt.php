@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['vers']) || !empty($_POST['szoveg']) || $_FILES["file"]["error"] == 0)){
+if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['szoveg']) || $_FILES["file"]["error"] == 0)){
     
     if (!empty($_POST['cim'])) {
         $cim = $_POST['cim'];
@@ -10,11 +10,11 @@ if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['vers']) |
     if (!empty($_POST['album'])) {
         $album = $_POST['album'];
     } else {
-        $album = NULL;
+        $album = 'Egyéb';
     }
 
     if (!empty($_POST['vers'])) {
-        $vers = $_POST['vers'];
+        $vers = true;
     } else {
         $vers = false;
     }
@@ -28,7 +28,7 @@ if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['vers']) |
     if (!empty($_POST['date'])) {
         $date = $_POST['date'];
     } else {
-        $date = NULL;
+        $date = date("Y-m-d");
     }
 
     //echo $cim . $album . $vers . $szoveg . $date;
@@ -62,14 +62,26 @@ if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['vers']) |
     <!--adatbázisba-->
     <?php require 'connect.php'; ?>
     <?php
-        $sql = "INSERT INTO kep (utvonal) VALUES ('$fileDestination');";
+        //album id lekérése
+            $sql = "SELECT Album_ID FROM album WHERE albumNev = '$album' ORDER BY Album_ID DESC LIMIT 1;";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_assoc($result);
+            $album_id = $row["Album_ID"];
+        //képet kép táblába feltölteni
+        if ($_FILES["file"]["error"] == 0) {
+            $sql = "INSERT INTO kep (utvonal, Album_ID) VALUES ('$fileDestination', '$album_id');";
+            mysqli_query($conn, $sql);
+            //kép id-t lekérni
+            $sql = "SELECT Kep_ID FROM kep WHERE utvonal = '$fileDestination' ORDER BY Kep_ID DESC LIMIT 1;";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_assoc($result);
+            $kep_id = $row["Kep_ID"];
+        }else {
+            $kep_id = NULL;
+        }
+        //post táblába feltöltés
+        $sql = "INSERT INTO post (cim, szoveg, Kep_ID, vers, datum) VALUES ('$cim', '$szoveg', '$kep_id', '$vers', '$date');";
         mysqli_query($conn, $sql);
-    
-        $sql = "SELECT Kep_ID FROM kep WHERE utvonal = '$fileDestination' ORDER BY Kep_ID DESC LIMIT 1;";
-        $result = mysqli_query($conn, $sql);
-        $row = mysqli_fetch_assoc($result);
-        $Kep_ID = row['Kep_ID'];
-        echo $Kep_ID;
     
     ?>
     <?php $conn->close(); ?>

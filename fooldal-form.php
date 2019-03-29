@@ -15,9 +15,22 @@
           </div>
           <div class="col-5">
             <select class="form-control" name="album">
-              <option value="" disabled selected>Melyik albumba kerüljön?</option>
-              <option>Család</option>
-              <option>Munka</option>
+            <option value="" disabled selected>Melyik albumba kerüljön?</option>';
+            require 'connect.php';
+
+            $sql = "SELECT albumNev FROM album";
+            $result = $conn->query($sql);
+            $resultCeck = mysqli_num_rows($result);
+            if ($resultCeck > 0) {
+                while($row = mysqli_fetch_assoc($result))
+                {
+                  echo  '<option>' . $row['albumNev'] . '</option>';
+                }
+            }
+            ?>
+            <?php $conn->close(); ?>
+            <?php echo                
+            '<option value="" disabled>Új album létrehozása a Galériában!</option>
             </select>
           </div>
           <div class="col-1">

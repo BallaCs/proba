@@ -1,14 +1,13 @@
-<?php require 'fejlec.php'; ?>
 <?php require 'connect.php'; ?>
 <div class="container">
     <?php
-        $sql = "SELECT cim, szoveg, Kep_ID, vers, datum FROM post WHERE vers = 1 ORDER BY datum, Post_ID DESC;";
+        $sql = "SELECT cim, szoveg, Kep_ID, datum FROM post ORDER BY datum, Post_ID DESC;";
         $result = $conn->query($sql);
         $resultCeck = mysqli_num_rows($result);
         if ($resultCeck > 0) {
             while($row = mysqli_fetch_assoc($result))
             {   
-                echo '<div class="vers">';
+                echo '<div class="poszt">';
                 if ($row['cim'] != NULL) {
                     echo   '<h2>' . $row['cim'] . '</h2>';
                 }
@@ -35,4 +34,3 @@
     ?>
 </div>
 <?php $conn->close(); ?>
-<?php require 'lablec.php'; ?>
