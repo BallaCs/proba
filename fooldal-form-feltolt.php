@@ -89,7 +89,7 @@ if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['szoveg'])
 
 
     <?php
-    //header("Location: index.php");
+    header("Location: index.php");
 }else{
     echo 'nononono';
 }

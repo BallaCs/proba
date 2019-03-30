@@ -1,7 +1,7 @@
 <?php require 'connect.php'; ?>
 <div class="container">
     <?php
-        $sql = "SELECT cim, szoveg, Kep_ID, datum FROM post ORDER BY datum, Post_ID DESC;";
+        $sql = "SELECT cim, szoveg, Kep_ID, datum, Post_ID, DATE_FORMAT(datum, '%Y-%m-%d') AS date FROM post ORDER BY `date` DESC, `Post_ID` DESC;";
         $result = $conn->query($sql);
         $resultCeck = mysqli_num_rows($result);
         if ($resultCeck > 0) {
@@ -12,7 +12,7 @@
                     echo   '<h2>' . $row['cim'] . '</h2>';
                 }
 
-                if ($row['Kep_ID'] != NULL) {
+                if ($row['Kep_ID'] != 0) {
                     $kep_id = $row['Kep_ID'];
                     $sql = "SELECT utvonal FROM kep WHERE Kep_ID = '$kep_id' ORDER BY Kep_ID DESC LIMIT 1;";
                     $result2 = mysqli_query($conn, $sql);
@@ -26,6 +26,7 @@
                     echo   '<p>' . $row['szoveg'] . '</p>';
                 }
 
+                echo $row['Post_ID'] . '+';
                 echo $row['datum'];
                 
                 echo '</div>';

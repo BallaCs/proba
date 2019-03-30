@@ -13,9 +13,30 @@
   </div>';
   }
 ?>
-
+<?php require 'connect.php'; ?>
+<div class="container">
+    <?php
+        $sql = "SELECT Album_ID, albumNev FROM album  ORDER BY Album_ID DESC;";
+        $result = $conn->query($sql);
+        $resultCeck = mysqli_num_rows($result);
+        if ($resultCeck > 0) {
+            while($row = mysqli_fetch_assoc($result))
+            {   
+                echo 
+                '<div class="album_framer">               
+                  <a href="album.php?id=' . $row['Album_ID'] . '&nev=' . $row['albumNev'] . '">' . $row['albumNev'] . '</a>               
+                </div>';
+            }
+        }
+    ?>
+</div>
+<?php $conn->close(); ?>
 <?php
-    /*http://www.example.com/test.php?a=10&b=plop
+
+
+
+
+    /*http://www.example.com/album.php?a=10&b=plop
 Then $_GET will contain :
 
 array
