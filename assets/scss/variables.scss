@@ -1,0 +1,9 @@
+@function color($palette:$primary,$color:base) {
+    @return map-get($palette,$color);
+}
+
+
+$szinek: (
+    elsodleges: #0c0c0c,
+    masodlagos: #fde2d1,
+);

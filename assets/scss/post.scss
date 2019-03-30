@@ -1,0 +1,32 @@
+.poszt {
+
+    margin-bottom: 30px;
+    border-bottom: 1px solid;
+    width: 100%;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 18px;
+    }
+
+    img {
+        max-width: 100%;
+        min-width: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    p {
+        white-space: pre-line;
+        margin-bottom: 15px;
+    }
+    .date {
+        text-align: right;
+        margin-bottom: 0;
+    }
+
+}

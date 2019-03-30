@@ -26,8 +26,7 @@
                     echo   '<p>' . $row['szoveg'] . '</p>';
                 }
 
-                echo $row['Post_ID'] . '+';
-                echo $row['datum'];
+                echo '<p class="date">' . $row['datum'] . '</p>';
                 
                 echo '</div>';
             }

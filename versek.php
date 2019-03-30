@@ -8,7 +8,7 @@
         if ($resultCeck > 0) {
             while($row = mysqli_fetch_assoc($result))
             {   
-                echo '<div class="vers">';
+                echo '<div class="poszt">';
                 if ($row['cim'] != NULL) {
                     echo   '<h2>' . $row['cim'] . '</h2>';
                 }
