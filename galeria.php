@@ -14,7 +14,9 @@
   }
 ?>
 <?php require 'connect.php'; ?>
+<div class="galeria">
 <div class="container">
+<div class="row">
     <?php
         $sql = "SELECT Album_ID, albumNev FROM album  ORDER BY Album_ID DESC;";
         $result = $conn->query($sql);
@@ -22,13 +24,21 @@
         if ($resultCeck > 0) {
             while($row = mysqli_fetch_assoc($result))
             {   
+                $sql2 = "SELECT utvonal FROM kep WHERE Album_ID = " . $row['Album_ID'] . "  ORDER BY Kep_ID DESC LIMIT 1;";
+                $result2 = $conn->query($sql2);
+                $row2 = mysqli_fetch_assoc($result2);
+                $utvonal = $row2["utvonal"];
                 echo 
-                '<div class="album_framer">               
-                  <a href="album.php?id=' . $row['Album_ID'] . '&nev=' . $row['albumNev'] . '">' . $row['albumNev'] . '</a>               
+                '<div class="col-4">
+                  <div class="album_framer">               
+                    <a href="album.php?id=' . $row['Album_ID'] . '&nev=' . $row['albumNev'] . '"><img src=' . $utvonal . '><p>' . $row['albumNev'] . '</p></a>               
+                  </div>
                 </div>';
             }
         }
     ?>
+</div>
+</div>
 </div>
 <?php $conn->close(); ?>
 <?php

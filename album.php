@@ -4,8 +4,11 @@
     $albumID = $_GET['id'];
 ?>
 <?php require 'connect.php'; ?>
+<div class="album">
 <div class="container">
+
     <h1><?php echo $albumNev?></h1>
+    <div class="row">
     <?php
         $sql = "SELECT utvonal FROM kep WHERE Album_ID = " . $albumID . "  ORDER BY Kep_ID DESC;";
         $result = $conn->query($sql);
@@ -15,12 +18,16 @@
             {   
                 $utvonal = $row['utvonal'];
                 echo 
-                '<div class="kep_framer">               
-                    <img src=' . $utvonal . '>             
+                '<div class="col-3">
+                    <div class="kep_framer">               
+                        <img src=' . $utvonal . '>             
+                    </div>
                 </div>';
             }
         }
     ?>
+    </div>
+</div>
 </div>
 <?php $conn->close(); ?>
 <?php require 'lablec.php'; ?>
