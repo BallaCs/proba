@@ -4,10 +4,43 @@
     echo 
     '<div class="container">
     <form class="form-inline" action="galeria-feltolt.php" method="post">
-      <div class="form-group">
-        <label for="album_nev">Új album létrehozása</label>
-        <input type="text" class="form-control" placeholder="Album név" name="album_nev">
-        <button name="submit" type="submit" class="btn btn-primary">Létrehozás</button>
+      <div class="form-group mb-2">
+        <label for="album_nev"  class="sr-only">Új album létrehozása</label>
+        <div class="form-group mx-sm-3 mb-2">
+          <input type="text" class="form-control"  placeholder="Album név" name="album_nev">
+        </div>
+        <button name="submit" type="submit" class="btn btn-primary mb-2">Létrehozás</button>
+      </div>
+    </form>
+
+    <form action="tobb-kep-fel.php" method="post" enctype="multipart/form-data">
+      <div class="form-row align-items-center">
+        <div class="col-6">
+          <div class="custom-file">
+            <input type="file" accept=".jpg,.jpeg,.png" data-max-size="4096000000" class="custom-file-input" name="file[]" multiple>
+            <label class="custom-file-label" for="file" data-browse="Tallózás...">Válassz képet</label>
+            <button name="submit" type="submit" class="btn btn-primary">Képek feltöltése</button>
+          </div>
+        </div>
+          <div class="col-6">
+            <select class="form-control" name="album">
+            <option value="" disabled selected>Melyik albumba kerüljön?</option>';
+            require 'connect.php';
+
+            $sql = "SELECT albumNev FROM album";
+            $result = $conn->query($sql);
+            $resultCeck = mysqli_num_rows($result);
+            if ($resultCeck > 0) {
+                while($row = mysqli_fetch_assoc($result))
+                {
+                  echo  '<option>' . $row['albumNev'] . '</option>';
+                }
+            }
+            ?>
+            <?php $conn->close(); ?>
+            <?php echo
+            '</select>
+          </div>
       </div>
     </form>
   </div>';

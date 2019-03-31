@@ -47,7 +47,7 @@ if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['szoveg'])
         $allowed = array('jpg','jpeg','png');
 
         if (in_array($fileActualExt, $allowed)) {
-            if ($fileSize < 2000000) {
+            if ($fileSize < 2097152) {
                 $fileNameNew = uniqid('', true).".".$fileActualExt;
                 $fileDestination = 'assets/kepek/'.$fileNameNew;
                 move_uploaded_file($fileTmpName, $fileDestination);
