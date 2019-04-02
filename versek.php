@@ -2,7 +2,7 @@
 <?php require 'connect.php'; ?>
 <div class="container">
     <?php
-        $sql = "SELECT cim, szoveg, Kep_ID, vers, datum, DATE_FORMAT(datum, '%Y-%m-%d') AS date FROM post WHERE vers = 1 ORDER BY `date` DESC, `Post_ID` DESC;";
+        $sql = "SELECT cim, szoveg, Kep_ID, vers, datum, Post_ID, video, DATE_FORMAT(datum, '%Y-%m-%d') AS date FROM post WHERE vers = 1 ORDER BY `date` DESC, `Post_ID` DESC;";
         $result = $conn->query($sql);
         $resultCeck = mysqli_num_rows($result);
         if ($resultCeck > 0) {
@@ -26,8 +26,19 @@
                 if ($row['szoveg'] != NULL) {
                     echo   '<p>' . $row['szoveg'] . '</p>';
                 }
+                if ($row['video'] != NULL) {
+                    $video = $row['video'];
+                    echo '<iframe width="1110" height="625"  src="https://www.youtube.com/embed/' . $video . '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                }
 
-                echo $row['datum'];
+                if (isset($_SESSION['username'])){
+                    echo '<div class ="row"><div class="col-6">
+                    <a href="poszt-szerkesztes.php?id=' .$row['Post_ID'] .'">Szerkesztés</a>';
+                    echo '<a href="poszt-torles.php?id=' .$row['Post_ID'] .'">Törlés</a></div>';
+                    echo '<div class="col-6"><p class="date">' . $row['datum'] . '</p></div></div>';
+                }else {
+                    echo '<p class="date">' . $row['datum'] . '</p>';
+                }
                 
                 echo '</div>';
             }

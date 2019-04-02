@@ -32,17 +32,14 @@
                 }
 
                 if (isset($_SESSION['username'])){
-                    $biztos = 'Biztos törlöd ezt a bejegyzést?';
                     echo '<div class ="row"><div class="col-6">
                     <a href="poszt-szerkesztes.php?id=' .$row['Post_ID'] .'">Szerkesztés</a>';
-                    echo '<a href="poszt-torles.php?id=' .$row['Post_ID'] .'" onClick=\"return confirm(' . $biztos . ')>Törlés</a></div>';
+                    echo '<a href="poszt-torles.php?id=' .$row['Post_ID'] .'">Törlés</a></div>';
                     echo '<div class="col-6"><p class="date">' . $row['datum'] . '</p></div></div>';
                 }else {
                     echo '<p class="date">' . $row['datum'] . '</p>';
                 }
-
-                
-                
+ 
                 echo '</div>';
             }
         }
