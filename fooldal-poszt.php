@@ -31,7 +31,17 @@
                     echo '<iframe width="1110" height="625"  src="https://www.youtube.com/embed/' . $video . '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
                 }
 
-                echo '<p class="date">' . $row['datum'] . '</p>';
+                if (isset($_SESSION['username'])){
+                    $biztos = 'Biztos törlöd ezt a bejegyzést?';
+                    echo '<div class ="row"><div class="col-6">
+                    <a href="poszt-szerkesztes.php?id=' .$row['Post_ID'] .'">Szerkesztés</a>';
+                    echo '<a href="poszt-torles.php?id=' .$row['Post_ID'] .'" onClick=\"return confirm(' . $biztos . ')>Törlés</a></div>';
+                    echo '<div class="col-6"><p class="date">' . $row['datum'] . '</p></div></div>';
+                }else {
+                    echo '<p class="date">' . $row['datum'] . '</p>';
+                }
+
+                
                 
                 echo '</div>';
             }
