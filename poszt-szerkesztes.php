@@ -30,7 +30,7 @@ $row = mysqli_fetch_assoc($result);
         $conn->close();
 ?>
 <div class="container">
-  <form action="poszt-szeresztes-db.php?id=<?php echo $id?>" method="post" enctype="multipart/form-data">
+  <form action="poszt-szerkesztes-db.php?id=<?php echo $id?>" method="post" enctype="multipart/form-data">
     <div class="form-group">
       <input type="text" class="form-control" name="cim" placeholder="Cím" value="<?php echo $cim;?>">
     </div>

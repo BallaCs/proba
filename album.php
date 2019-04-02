@@ -1,7 +1,12 @@
 <?php require 'fejlec.php'; ?>
 <?php
+if (isset($_GET['nev']) && isset($_GET['id'])) {
     $albumNev = $_GET['nev'];
     $albumID = $_GET['id'];
+}else {
+    header("Location: galeria.php");
+}
+   
 ?>
 <?php require 'connect.php'; ?>
 <div class="album">
@@ -10,7 +15,7 @@
     <h1><?php echo $albumNev?></h1>
     <div class="row">
     <?php
-        $sql = "SELECT utvonal FROM kep WHERE Album_ID = " . $albumID . "  ORDER BY Kep_ID DESC;";
+        $sql = "SELECT utvonal, Kep_ID FROM kep WHERE Album_ID = " . $albumID . "  ORDER BY Kep_ID DESC;";
         $result = $conn->query($sql);
         $resultCeck = mysqli_num_rows($result);
         if ($resultCeck > 0) {
@@ -21,8 +26,13 @@
                 echo 
                 '<div class="col-3">
                     <div class="kep_framer">               
-                        <img src=' . $utvonal . ' onclick="openModal();currentSlide('.$i.')">             
-                    </div>
+                        <img src=' . $utvonal . ' onclick="openModal();currentSlide('.$i.')">';  
+                        if (isset($_SESSION['username'])){
+                            echo '
+                            <a href="kep-szerkesztes.php?id=' .$row['Kep_ID'] .'">Áthelyezés</a>';
+                            echo '<a href="kep-torles.php?id=' .$row['Kep_ID'] .'">Törlés</a>';
+                        }            
+                    echo '</div>
                 </div>';
                 $i++;
             }

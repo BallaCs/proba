@@ -64,8 +64,13 @@
                 echo 
                 '<div class="col-4">
                   <div class="album_framer">               
-                    <a href="album.php?id=' . $row['Album_ID'] . '&nev=' . $row['albumNev'] . '"><img src=' . $utvonal . '><p>' . $row['albumNev'] . '</p></a>               
-                  </div>
+                    <a href="album.php?id=' . $row['Album_ID'] . '&nev=' . $row['albumNev'] . '"><img src=' . $utvonal . '><p>' . $row['albumNev'] . '</p></a>';               
+                    if (isset($_SESSION['username'])){
+                      echo '
+                      <a href="album-szerkesztes.php?id=' .$row['Album_ID'] .'">Átnevezés</a>';
+                      echo '<a href="album-torles.php?id=' .$row['Album_ID'] .'">Törlés</a>';
+                  } 
+                    echo '</div>
                 </div>';
             }
         }
