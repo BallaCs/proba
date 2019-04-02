@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['szoveg']) || $_FILES["file"]["error"] == 0)){
+if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['szoveg']) || !empty($_POST['video']) || $_FILES["file"]["error"] == 0)){
     
     if (!empty($_POST['cim'])) {
         $cim = $_POST['cim'];
@@ -23,6 +23,13 @@ if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['szoveg'])
         $szoveg = $_POST['szoveg'];
     } else {
         $szoveg = NULL;
+    }
+
+    if (!empty($_POST['video'])) {
+        $video_array = explode('=', $_POST['video']);
+        $video = end($video_array);
+    } else {
+        $video = NULL;
     }
 
     if (!empty($_POST['date'])) {
@@ -80,7 +87,7 @@ if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['szoveg'])
             $kep_id = NULL;
         }
         //post táblába feltöltés
-        $sql = "INSERT INTO post (cim, szoveg, Kep_ID, vers, datum) VALUES ('$cim', '$szoveg', '$kep_id', '$vers', '$date');";
+        $sql = "INSERT INTO post (cim, szoveg, Kep_ID, vers, datum, video) VALUES ('$cim', '$szoveg', '$kep_id', '$vers', '$date', '$video');";
         mysqli_query($conn, $sql);
     
     ?>

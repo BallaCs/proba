@@ -1,7 +1,7 @@
 <?php require 'connect.php'; ?>
 <div class="container">
     <?php
-        $sql = "SELECT cim, szoveg, Kep_ID, datum, Post_ID, DATE_FORMAT(datum, '%Y-%m-%d') AS date FROM post ORDER BY `date` DESC, `Post_ID` DESC;";
+        $sql = "SELECT cim, szoveg, Kep_ID, datum, Post_ID, video,DATE_FORMAT(datum, '%Y-%m-%d') AS date FROM post ORDER BY `date` DESC, `Post_ID` DESC;";
         $result = $conn->query($sql);
         $resultCeck = mysqli_num_rows($result);
         if ($resultCeck > 0) {
@@ -24,6 +24,11 @@
                 
                 if ($row['szoveg'] != NULL) {
                     echo   '<p>' . $row['szoveg'] . '</p>';
+                }
+
+                if ($row['video'] != NULL) {
+                    $video = $row['video'];
+                    echo '<iframe width="1110" height="625"  src="https://www.youtube.com/embed/' . $video . '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
                 }
 
                 echo '<p class="date">' . $row['datum'] . '</p>';

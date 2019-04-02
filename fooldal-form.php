@@ -64,7 +64,10 @@
         </script>
       <?php
       echo
-      '<button type="submit" name="submit" class="btn btn-primary">Közzétesz</button>
+      '<div class="form-group">
+        <input type="url" class="form-control" name="video" placeholder="Youtube video link">
+      </div>
+      <button type="submit" name="submit" class="btn btn-primary">Közzétesz</button>
       </form>
     </div>';
   }
