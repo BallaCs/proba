@@ -1,132 +1,39 @@
 <?php require 'fejlec.php'; ?>
-<?php
-$received_url = "https://ujforras.hu/la-belle-indifference/";
-//$received_url = "https://www.webslake.com/p/generating-link-preview-using-php/";
-$url = htmlspecialchars(trim($received_url),ENT_QUOTES,'ISO-8859-1',TRUE);
+<?php if (isset($_SESSION['username'])){ ?>
+    <div class="container">
+        <div class="row justify-content-center">
+            <form action="link-feltolt.php?type=3" method="post">
+                <input class="col-6 url-sor" type="url" name="link" id="link" placeholder="Megosztani kívánt link:">
+                <button type="submit" name="submit" class="form-gomb col-5">Közzétesz</button>
+            </form>
+        </div>
+    </div>
+<?php } ?>
+<div class=link-oldal>
+    <div class="container">
+        <h2>Cikkek rólam</h2>
+        <div class="row">
+            <?php 
+            require 'connect.php';
 
-$host = '';
-
-if( !empty($url) )
-{
-    $url_data = parse_url($url);
-    $host = $url_data['host'];
-
-    $file = fopen($url,'r');
-    
-    if(!$file)
-    {
-        exit();
-    }
-    else
-    {
-        $content = '';
-        while(!feof($file))
-        {
-            $content .= fgets($file,1024);
-        }
-
-        $meta_tags = get_meta_tags($url);
-
-        // Get the title
-        $title = '';
-
-        if( array_key_exists('og:title',$meta_tags) )
-        {
-            $title = $meta_tags['og:title'];
-        }
-        else if( array_key_exists('twitter:title',$meta_tags) )
-        {
-            $title = $meta_tags['twitter:title'];
-        }
-        else
-        {
-            $title_pattern = '/<title>(.+)<\/title>/i';
-            preg_match_all($title_pattern,$content,$title,PREG_PATTERN_ORDER);
-
-            if( !is_array($title[1]) )
-                $title = $title[1];
-            else
-            {
-                if( count($title[1]) > 0 )
-                    $title = $title[1][0];
-                else
-                    $title = 'Title not found!';
-            }
-        }
-
-        $title = ucfirst($title);
-
-        // Get the description
-        $desc = '';
-        
-        if( array_key_exists('description',$meta_tags) )
-        {
-            $desc = $meta_tags['description'];
-        }
-        else if( array_key_exists('og:description',$meta_tags) )
-        {
-            $desc = $meta_tags['og:description'];
-        }
-        else if( array_key_exists('twitter:description',$meta_tags) )
-        {
-            $desc = $meta_tags['twitter:description'];
-        }
-        else
-        {
-            $desc = 'Description not found!';
-        }
-
-        $desc = ucfirst($desc);
-
-        // Get url of preview image
-        $img_url = '';
-        if( array_key_exists('og:image',$meta_tags) )
-        {
-            $img_url = $meta_tags['og:image'];
-        }
-        else if( array_key_exists('og:image:src',$meta_tags) )
-        {
-            $img_url = $meta_tags['og:image:src'];
-        }
-        else if( array_key_exists('twitter:image',$meta_tags) )
-        {
-            $img_url = $meta_tags['twitter:image'];
-        }
-        else if( array_key_exists('twitter:image:src',$meta_tags) )
-        {
-            $img_url = $meta_tags['twitter:image:src'];
-        }
-        else
-        {
-            // Image not found in meta tags so find it from content
-            $img_pattern = '/<img[^>]*'.'src=[\"|\'](.*)[\"|\']/Ui';
-            $images = '';
-            preg_match_all($img_pattern,$content,$images,PREG_PATTERN_ORDER);
-
-            $total_images = count($images[1]);
-            if( $total_images > 0 )
-                $images = $images[1];
-
-            for($i=0; $i<$total_images; $i++)
-            {
-                if(getimagesize($images[$i]))
-                {
-                    list($width,$height,$type,$attr) = getimagesize($images[$i]);
+            $sql = "SELECT link, Link_ID FROM linkmegoszt WHERE tipus=3 ORDER BY Link_ID DESC;";
+            $result = $conn->query($sql);
+            $resultCeck = mysqli_num_rows($result);
+            if ($resultCeck > 0) {
+                while($row = mysqli_fetch_assoc($result))
+                {   
+                    echo '<div class="col-6">';
+                    echo '<a href="link-torles.php?id=' .$row['Link_ID'] .'&type=3">Törlés</a>';
+                    $received_url = $row['link'];
+                    include 'link-preview.php';
                     
-                    if( $width > 600 ) // Select an image of width greater than 600px
-                    {
-                        $img_url = $images[$i];
-                        break;
-                    }
+                    echo '</div>';
                 }
             }
-        }
-        
-        echo "<div>$title</div>";
-        echo "<div><img src='$img_url' alt='Preview image'></div>";
-        echo "<div>$desc</div>";
-        echo "<div>$host</div>";
-    }
-}
-?>
+            ?>
+            <?php $conn->close(); ?>
+
+        </div>
+    </div>
+</div>
 <?php require 'lablec.php'; ?>

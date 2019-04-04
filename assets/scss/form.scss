@@ -1,3 +1,28 @@
 .form-group{
     margin-top: 1rem;
 }
+
+form {
+    margin: 30px 0;
+}
+
+.form-gomb {
+    width: 200px;
+    border: 1px solid color($szinek, gomb_hat);
+    border-top-left-radius: 2px;
+    background-color: color($szinek, gomb_hat);
+    color: color($szinek, gomb_elol);
+    font-weight: bold;
+    text-align: center;
+    padding: 2px;
+}
+.form-gomb:hover{
+    box-shadow: 0 0 15px red;
+}
+
+.url-sor {
+    border: none;
+    border-bottom: 1px solid;
+    width: 500px;
+    background-color: transparent;
+}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2019. Ápr 03. 18:10
+-- Létrehozás ideje: 2019. Ápr 04. 23:10
 -- Kiszolgáló verziója: 10.1.37-MariaDB
 -- PHP verzió: 7.3.1
 
@@ -97,6 +97,36 @@ INSERT INTO `kep` (`Kep_ID`, `utvonal`, `Album_ID`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `linkmegoszt`
+--
+
+CREATE TABLE `linkmegoszt` (
+  `Link_ID` int(6) NOT NULL,
+  `link` varchar(250) COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `tipus` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `linkmegoszt`
+--
+
+INSERT INTO `linkmegoszt` (`Link_ID`, `link`, `tipus`) VALUES
+(2, 'https://www.webslake.com/p/generating-link-preview-using-php/', 3),
+(4, 'https://ujforras.hu/ufo-felszaz-hegedus-gyongyi-fotonaploja/', 3),
+(5, 'https://ujforras.hu/megszunt-penznem/', 1),
+(6, 'https://ujforras.hu/a-nap-amikor-nem-faj-semmi/', 1),
+(7, 'https://ujforras.hu/komparasztika/', 1),
+(8, 'https://ujforras.hu/a-fiusag-vasara/', 1),
+(9, 'https://ujforras.hu/ebredes-utani-nyujtozas/', 1),
+(10, 'https://ujforras.hu/catcher-in-the-reye/', 1),
+(11, 'https://ujforras.hu/b-sz-triptychon/', 1),
+(12, 'https://ujforras.hu/la-belle-indifference/', 1),
+(13, 'https://ujforras.hu/hidasi-hegedus-gyongyi-intrauterin-fenyek/', 2),
+(14, 'https://ujforras.hu/hegedus-gyongyi-grand-piano-sign/', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `post`
 --
 
@@ -140,6 +170,12 @@ ALTER TABLE `kep`
   ADD PRIMARY KEY (`Kep_ID`);
 
 --
+-- A tábla indexei `linkmegoszt`
+--
+ALTER TABLE `linkmegoszt`
+  ADD PRIMARY KEY (`Link_ID`);
+
+--
 -- A tábla indexei `post`
 --
 ALTER TABLE `post`
@@ -160,6 +196,12 @@ ALTER TABLE `album`
 --
 ALTER TABLE `kep`
   MODIFY `Kep_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT a táblához `linkmegoszt`
+--
+ALTER TABLE `linkmegoszt`
+  MODIFY `Link_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT a táblához `post`
