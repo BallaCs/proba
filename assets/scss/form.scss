@@ -9,7 +9,8 @@ form {
 .form-gomb {
     width: 200px;
     border: 1px solid color($szinek, gomb_hat);
-    border-top-left-radius: 2px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
     background-color: color($szinek, gomb_hat);
     color: color($szinek, gomb_elol);
     font-weight: bold;

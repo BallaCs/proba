@@ -3,29 +3,24 @@
   if (isset($_SESSION['username'])){
     echo 
     '<div class="container">
-    <form class="form-inline" action="galeria-feltolt.php" method="post">
-      <div class="form-group mb-2">
-        <label for="album_nev"  class="sr-only">Új album létrehozása</label>
-        <div class="form-group mx-sm-3 mb-2">
-          <input type="text" class="form-control"  placeholder="Album név" name="album_nev">
-        </div>
-        <button name="submit" type="submit" class="btn btn-primary mb-2">Létrehozás</button>
-      </div>
+    <div class="row justify-content-center">
+    <form action="galeria-feltolt.php" method="post">
+        <input type="text" class="col-6 url-sor"  placeholder="ÚJ Album név" name="album_nev">       
+        <button name="submit" type="submit" class="form-gomb col-5">Létrehozás</button>
     </form>
+    </div>
 
     <form action="tobb-kep-fel.php" method="post" enctype="multipart/form-data">
-      <div class="form-row align-items-center">
-        <div class="col-6">
+    <div class="row justify-content-center">
+        <div class="col-5">
           <div class="custom-file">
             <input type="file" accept=".jpg,.jpeg,.png" data-max-size="4096000000" class="custom-file-input" name="file[]" multiple>
-            <label class="custom-file-label" for="file" data-browse="Tallózás...">Válassz képet</label>
-            <button name="submit" type="submit" class="btn btn-primary">Képek feltöltése</button>
+            <label class="custom-file-label" for="file" data-browse="Tallózás...">Válassz képet</label>       
           </div>
         </div>
-          <div class="col-6">
-            <select class="form-control" name="album">
-            <option value="" disabled selected>Melyik albumba kerüljön?</option>';
-            require 'connect.php';
+        <select class="col-4 url-sor" name="album">
+        <option value="" disabled selected>Melyik albumba kerüljön?</option>';
+        require 'connect.php';
 
             $sql = "SELECT albumNev FROM album";
             $result = $conn->query($sql);
@@ -37,10 +32,10 @@
                 }
             }
             ?>
-            <?php $conn->close(); ?>
-            <?php echo
-            '</select>
-          </div>
+        <?php $conn->close(); ?>
+        <?php echo
+        '</select>
+        <button name="submit" type="submit" class="form-gomb col-3">Képek feltöltése</button>
       </div>
     </form>
   </div>';

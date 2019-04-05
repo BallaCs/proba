@@ -1,30 +1,28 @@
+<?php require 'fejlec.php'; ?>
+<?php if (isset($_SESSION['username'])){ ?>
 <?php
-//if (isset($_SESSION['username'])){
+
     $id = $_GET['id'];
-/*
+
   require 'connect.php';
 
-  $sql = "SELECT utvonal FROM kep WHERE Album_ID = " . $id . ";";
-  $result = $conn->query($sql);
-  $resultCeck = mysqli_num_rows($result);
-  if ($resultCeck > 0) {
-      $i = 1;
-      while($row = mysqli_fetch_assoc($result))
-      {   
-          $utvonal = $row['utvonal'];
-          unlink($utvonal);
-      }
-  }
+  $sql = "SELECT albumNev FROM album WHERE Album_ID = " . $id . ";";
 
-    $sql = "DELETE FROM album WHERE Album_ID = ". $id .";";
-    mysqli_query($conn, $sql);
-    $sql = "DELETE FROM kep WHERE kep.Album_ID = ". $id .";";   
-    mysqli_query($conn, $sql);
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_assoc($result);
+  $album_nev = $row["albumNev"];
+
 
   $conn->close();
-*/
-  header("Location: galeria.php");
 
-    
-//}
 ?>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <form action="album-szerkesztes-db.php?id=<?php echo $id; ?>" method="post">
+                <input class="col-6 url-sor" type="text" name="ujnev" id="ujnev" value="<?php echo $album_nev?>">
+                <button type="submit" name="submit" class="form-gomb col-5">Átnevezés</button>
+            </form>
+        </div>
+    </div>
+<?php };?>
