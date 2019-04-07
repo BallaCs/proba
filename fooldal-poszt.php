@@ -33,8 +33,8 @@
 
                 if (isset($_SESSION['username'])){
                     echo '<div class ="row"><div class="col-6">
-                    <a href="poszt-szerkesztes.php?id=' .$row['Post_ID'] .'">Szerkesztés</a>';
-                    echo '<a href="poszt-torles.php?id=' .$row['Post_ID'] .'">Törlés</a></div>';
+                    <a href="poszt-szerkesztes.php?id=' .$row['Post_ID'] .'"><i class="fas fa-edit"></i> Szerkesztés</a>';
+                    echo '<a href="poszt-torles.php?id=' .$row['Post_ID'] .'"><i class="fas fa-trash-alt"></i> Törlés</a></div>';
                     echo '<div class="col-6"><p class="date">' . $row['datum'] . '</p></div></div>';
                 }else {
                     echo '<p class="date">' . $row['datum'] . '</p>';

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2019. Ápr 04. 23:10
+-- Létrehozás ideje: 2019. Ápr 07. 12:46
 -- Kiszolgáló verziója: 10.1.37-MariaDB
 -- PHP verzió: 7.3.1
 
@@ -38,7 +38,7 @@ CREATE TABLE `album` (
 --
 
 INSERT INTO `album` (`Album_ID`, `albumNev`) VALUES
-(1, 'csalad'),
+(1, 'CsalÃ¡d'),
 (2, 'munka'),
 (3, 'Csani'),
 (4, 'Csenge'),
@@ -84,7 +84,7 @@ INSERT INTO `kep` (`Kep_ID`, `utvonal`, `Album_ID`) VALUES
 (22, 'assets/kepek/5ca12f6dd5c158.10761246.jpg', 1),
 (24, 'assets/kepek/5ca12f6debf182.87669063.jpg', 1),
 (25, 'assets/kepek/5ca12f6e0807e9.25155969.jpg', 1),
-(26, 'assets/kepek/5ca12f6e12b320.57029262.jpg', 1),
+(26, 'assets/kepek/5ca12f6e12b320.57029262.jpg', 6),
 (27, 'assets/kepek/5ca12f6e205b45.69828692.jpg', 1),
 (28, 'assets/kepek/5ca12f6e2b2a06.58089412.jpg', 1),
 (29, 'assets/kepek/5ca12f6e3e1544.53656773.jpg', 1),
@@ -152,6 +152,26 @@ INSERT INTO `post` (`Post_ID`, `cim`, `szoveg`, `Kep_ID`, `vers`, `video`, `datu
 (14, 'CsanÃ¡d', 'Morbi pharetra ipsum quis eros porta, vel viverra augue vehicula. Maecenas fringilla nibh quis eros viverra ultrices. Aenean euismod venenatis pretium. Aliquam blandit efficitur metus, eget sagittis velit laoreet sollicitudin. Proin dapibus purus id odio consectetur, et sodales metus volutpat. Pellentesque non ante molestie, suscipit lorem vitae, viverra orci. Vestibulum sem erat, convallis sit amet feugiat eu, volutpat at diam. Aenean nec leo vel est molestie convallis eu sed lorem. Pellentesque fringilla nunc nec augue eleifend, vel ultricies felis fermentum. Fusce rhoncus, justo vitae scelerisque ullamcorper, sem sem pharetra elit, id vulputate tellus velit vel ante. Integer tincidunt, magna non faucibus fermentum, lectus justo vulputate justo, vitae porta sapien metus non magna. Maecenas sapien metus, tempor nec erat ac, convallis facilisis velit.', 0, 1, '', '2019-04-01'),
 (15, 'CÃ­m', 'Morbi pharetra ipsum quis eros porta, vel viverra augue vehicula. Maecenas fringilla nibh quis eros viverra ultrices. Aenean euismod venenatis pretium. Aliquam blandit efficitur metus, eget sagittis velit laoreet sollicitudin. ', 40, 0, '', '2019-04-02'),
 (17, 'CsanÃ¡d4', 'Morbi pharetra ipsum quis eros porta, vel viverra augue vehicula. Maecenas fringilla nibh quis eros viverra ultrices. Aenean euismod venenatis pretium. Aliquam blandit efficitur metus, eget sagittis velit laoreet sollicitudin. Proin dapibus purus id odio consectetur, et sodales metus volutpat. Pellentesque non ante molestie, suscipit lorem vitae, viverra orci. Vestibulum sem erat, convallis sit amet feugiat eu, volutpat at diam. Aenean nec leo vel est molestie convallis eu sed lorem. Pellentesque fringilla nunc nec augue eleifend, vel ultricies felis fermentum. Fusce rhoncus, justo vitae scelerisque ullamcorper, sem sem pharetra elit, id vulputate tellus velit vel ante. Integer tincidunt, magna non faucibus fermentum, lectus justo vulputate justo, vitae porta sapien metus non magna. Maecenas sapien metus, tempor nec erat ac, convallis facilisis velit.', 0, 1, '', '2019-04-02');
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `szerkeszto`
+--
+
+CREATE TABLE `szerkeszto` (
+  `FelhasznaloNev` varchar(4) COLLATE utf8_hungarian_ci NOT NULL,
+  `Jelszo` varchar(60) COLLATE utf8_hungarian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `szerkeszto`
+--
+
+INSERT INTO `szerkeszto` (`FelhasznaloNev`, `Jelszo`) VALUES
+('root', 'dc76e9f0c0006e8f919e'),
+('Bora', '01baa84e8e80cb590b41'),
+('root', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785');
 
 --
 -- Indexek a kiírt táblákhoz

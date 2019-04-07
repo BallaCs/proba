@@ -1,14 +1,16 @@
 <?php
 if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['szoveg']) || !empty($_POST['video']) || $_FILES["file"]["error"] == 0)){
     
+    require 'connect.php';
+
     if (!empty($_POST['cim'])) {
-        $cim = $_POST['cim'];
+        $cim = mysqli_real_escape_string($conn, $_POST['cim']);
     } else {
         $cim = NULL;
     }
 
     if (!empty($_POST['album'])) {
-        $album = $_POST['album'];
+        $album = mysqli_real_escape_string($conn, $_POST['album']);
     } else {
         $album = 'Egyéb';
     }
@@ -20,27 +22,27 @@ if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['szoveg'])
     }
     
     if (!empty($_POST['szoveg'])) {
-        $szoveg = $_POST['szoveg'];
+        $szoveg = mysqli_real_escape_string($conn, $_POST['szoveg']);
     } else {
         $szoveg = NULL;
     }
 
     if (!empty($_POST['video'])) {
         $video_array = explode('=', $_POST['video']);
-        $video = end($video_array);
+        $video = mysqli_real_escape_string($conn, end($video_array));
     } else {
         $video = NULL;
     }
 
     if (!empty($_POST['date'])) {
-        $date = $_POST['date'];
+        $date = mysqli_real_escape_string($conn, $_POST['date']);
     } else {
         $date = date("Y-m-d");
     }
 
     //echo $cim . $album . $vers . $szoveg . $date;
     if ($_FILES["file"]["error"] == 0) {
-        $file = $_FILES['file'];
+        $file = mysqli_real_escape_string($conn, $_FILES['file']);
 
         $fileName = $file['name'];
         $fileTmpName = $file['tmp_name'];
@@ -67,7 +69,7 @@ if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['szoveg'])
     }
     ?>
     <!--adatbázisba-->
-    <?php require 'connect.php'; ?>
+    
     <?php
         //album id lekérése
             $sql = "SELECT Album_ID FROM album WHERE albumNev = '$album' ORDER BY Album_ID DESC LIMIT 1;";
@@ -98,6 +100,6 @@ if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['szoveg'])
     <?php
     header("Location: index.php");
 }else{
-    echo 'nononono';
+    header("Location: index.php?upload=failed");
 }
 ?>

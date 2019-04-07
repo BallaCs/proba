@@ -1,8 +1,8 @@
 <?php 
 $link_type = $_GET['type'];
 if(isset($_POST['submit']) && !empty($_POST['link'])){
-    $link=$_POST['link'];
     require 'connect.php';
+    $link=mysqli_real_escape_string($conn, $_POST['link']); 
 
     $sql = "INSERT INTO linkmegoszt (link, tipus) VALUES ('$link', '$link_type');";
     mysqli_query($conn, $sql);

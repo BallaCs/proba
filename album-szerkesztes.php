@@ -2,9 +2,8 @@
 <?php if (isset($_SESSION['username'])){ ?>
 <?php
 
-    $id = $_GET['id'];
-
-  require 'connect.php';
+    require 'connect.php';
+    $id = mysqli_real_escape_string($conn, $_GET['id']);
 
   $sql = "SELECT albumNev FROM album WHERE Album_ID = " . $id . ";";
 

@@ -1,14 +1,15 @@
 <?php require 'fejlec.php'; ?>
+<?php require 'connect.php'; ?>
 <?php
 if (isset($_GET['nev']) && isset($_GET['id'])) {
-    $albumNev = $_GET['nev'];
-    $albumID = $_GET['id'];
+    $albumNev = mysqli_real_escape_string($conn, $_GET['nev']);
+    $albumID = mysqli_real_escape_string($conn, $_GET['id']);
 }else {
     header("Location: galeria.php");
 }
    
 ?>
-<?php require 'connect.php'; ?>
+
 <div class="album">
 <div class="container">
 
@@ -29,8 +30,8 @@ if (isset($_GET['nev']) && isset($_GET['id'])) {
                         <img src=' . $utvonal . ' onclick="openModal();currentSlide('.$i.')">';  
                         if (isset($_SESSION['username'])){
                             echo '
-                            <a href="kep-szerkesztes.php?id=' .$row['Kep_ID'] .'">Áthelyezés</a>';
-                            echo '<a href="kep-torles.php?id=' .$row['Kep_ID'] .'">Törlés</a>';
+                            <a href="kep-szerkesztes.php?id=' .$row['Kep_ID'] .'"><i class="fas fa-edit"></i> Áthelyezés</a>';
+                            echo '<a href="kep-torles.php?id=' .$row['Kep_ID'] .'"><i class="fas fa-trash-alt"></i> Törlés</a>';
                         }            
                     echo '</div>
                 </div>';

@@ -1,9 +1,8 @@
 <?php
-//if (isset($_SESSION['username'])){
-    $id = $_GET['id'];
-    $link_type = $_GET['type'];
+  require 'connect.php';  
 
-  require 'connect.php';
+    $id = mysqli_real_escape_string($conn, $_GET['id']);
+    $link_type = mysqli_real_escape_string($conn, $_GET['type']);
 
     $sql = "DELETE FROM linkmegoszt WHERE Link_ID = ". $id .";";
     mysqli_query($conn, $sql);
@@ -19,7 +18,4 @@
 }else {
     header("Location: index.php");
 }
-
-    
-//}
 ?>

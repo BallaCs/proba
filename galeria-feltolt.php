@@ -1,12 +1,10 @@
 <?php
 if(isset($_POST['submit']) && (!empty($_POST['album_nev'])) ){
     
-    $album_nev = $_POST['album_nev'];
-    
-    ?>
-    <!--adatbázisba-->
-    <?php require 'connect.php'; ?>
-    <?php
+    require 'connect.php';
+    $album_nev = mysqli_real_escape_string($conn, $_POST['album_nev']);
+
+    //adatbázisba
         //album táblába feltöltés
         $sql = "SELECT albumNev FROM album";
         $result = $conn->query($sql);

@@ -1,20 +1,19 @@
 <?php require 'fejlec.php'; ?>
 <?php 
 require 'connect.php';
-$id = $_GET['id']; 
+$id = mysqli_real_escape_string($conn, $_GET['id']); 
 $sql = "SELECT cim, szoveg, Kep_ID, datum, Post_ID, video, vers FROM post WHERE Post_ID = " .$id .";";
 $result = $conn->query($sql);
 $row = mysqli_fetch_assoc($result);
-       // if ($row['cim'] != NULL) {
-            $cim = $row['cim'];
-       // }
+
+        $cim = $row['cim'];
         
         if ($row['Kep_ID'] != 0) {
             $kep = $row['Kep_ID'];
         }
-        //if ($row['szoveg'] != NULL) {
-            $szoveg = $row['szoveg'];
-        //}
+
+        $szoveg = $row['szoveg'];
+        
         if ($row['video'] != NULL) {
             $video = $row['video'];
         }else {
@@ -78,7 +77,7 @@ $row = mysqli_fetch_assoc($result);
     </div>
     <script>
       $(document).ready(function(){
-        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var date_input=$('input[name="date"]');
         var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
         date_input.datepicker({
           format: 'yyyy-mm-dd',

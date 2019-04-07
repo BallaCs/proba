@@ -62,8 +62,8 @@
                     <a href="album.php?id=' . $row['Album_ID'] . '&nev=' . $row['albumNev'] . '"><img src=' . $utvonal . '><p>' . $row['albumNev'] . '</p></a>';               
                     if (isset($_SESSION['username'])){
                       echo '
-                      <a href="album-szerkesztes.php?id=' .$row['Album_ID'] .'">Átnevezés</a>';
-                      echo '<a href="album-torles.php?id=' .$row['Album_ID'] .'">Törlés</a>';
+                      <a href="album-szerkesztes.php?id=' .$row['Album_ID'] .'"><i class="fas fa-edit"></i> Átnevezés</a>';
+                      echo '<a href="album-torles.php?id=' .$row['Album_ID'] .'"><i class="fas fa-trash-alt"></i> Törlés</a>';
                   } 
                     echo '</div>
                 </div>';
@@ -74,20 +74,4 @@
 </div>
 </div>
 <?php $conn->close(); ?>
-<?php
-
-
-
-
-    /*http://www.example.com/album.php?a=10&b=plop
-Then $_GET will contain :
-
-array
-  'a' => string '10' (length=2)
-  'b' => string 'plop' (length=4)
-
-Of course, as $_GET is not read-only, you could also set some values from your PHP code, if needed :
-
-$_GET['my_value'] = 'test';*/
-?>
 <?php require 'lablec.php'; ?>

@@ -23,7 +23,9 @@
                 while($row = mysqli_fetch_assoc($result))
                 {
                     echo '<div class="col-6">';
-                    echo '<a href="link-torles.php?id=' .$row['Link_ID'] .'&type=2">Törlés</a>';
+                    if (isset($_SESSION['username'])){
+                        echo '<a href="link-torles.php?id=' .$row['Link_ID'] .'&type=2"><i class="fas fa-trash-alt"></i> Törlés</a>';
+                    } 
                     $received_url = $row['link'];
                     include 'link-preview.php';
                     
