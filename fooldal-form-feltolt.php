@@ -42,7 +42,7 @@ if(isset($_POST['submit']) && (!empty($_POST['cim']) || !empty($_POST['szoveg'])
 
     //echo $cim . $album . $vers . $szoveg . $date;
     if ($_FILES["file"]["error"] == 0) {
-        $file = mysqli_real_escape_string($conn, $_FILES['file']);
+        $file = $_FILES['file'];
 
         $fileName = $file['name'];
         $fileTmpName = $file['tmp_name'];

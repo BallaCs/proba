@@ -41,7 +41,7 @@ if(isset($_POST['submit'])){
     }
 
     if ($_FILES["file"]["error"] == 0) {
-        $file = mysqli_real_escape_string($conn, $_FILES['file']);
+        $file = $_FILES['file'];
 
         $fileName = $file['name'];
         $fileTmpName = $file['tmp_name'];
